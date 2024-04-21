@@ -78,14 +78,14 @@ public class WorkerImplTest {
 
         Article article1 = new Article("Title 1", "Content 1", "Author 1", LocalDate.parse("2023-01-01"));
         Article article2 = new Article("Title 2", "Content 2", "Author 2", LocalDate.parse("2024-01-01"));
-        Article article3 = new Article("Title 1", "Content 3", "Author 3", LocalDate.parse("2024-01-01")); // Duplicate title
+        Article article3 = new Article("Title 1", "Content 3", "Author 3", LocalDate.parse("2024-01-01"));
         List<Article> articles = Arrays.asList(article1, article2, article3);
 
         List<Article> preparedArticles = worker.prepareArticles(articles);
 
-        assertEquals(2, preparedArticles.size()); // Only unique titles should be kept
+        assertEquals(2, preparedArticles.size()); 
 
-        verify(libraryMock, never()).store(anyInt(), anyList()); // No articles should be stored
+        verify(libraryMock, never()).store(anyInt(), anyList()); 
     }
 }
 
