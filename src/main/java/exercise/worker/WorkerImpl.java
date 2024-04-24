@@ -35,10 +35,11 @@ public class WorkerImpl implements Worker {
 
     @Override
     public List<Article> prepareArticles(List<Article> articles) {
-        List<Article> result = articles
-                .stream()
+        Map<String, Article> uniqueArticles = articles.stream()
                 .filter(this::isArticleCorrect)
-                .toList();
+                .collect(Collectors.toMap(Article::getTitle, a -> a, (existing, replacement) -> existing));
+
+        List<Article> result = uniqueArticles.values().stream().toList();
         result.forEach(this::prepareDate);
         return result;
     }
